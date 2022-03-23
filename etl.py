@@ -1,4 +1,5 @@
-from prefect import context, task, Flow
+import prefect
+from prefect import task, Flow
 
 @task
 def extract_reference_data():
@@ -18,12 +19,12 @@ def transform(live_data, reference_data):
 
 @task
 def load_reference_data(reference_data):
-    logger = context.get("logger")
+    logger = prefect.context.get("logger")
     logger.info(f"Reference data: {reference_data}")
 
 @task
 def load_live_data(transformed_data):
-    logger = context.get("logger")
+    logger = prefect.context.get("logger")
     logger.info(f"Transformed data: {transformed_data}")
 
 
